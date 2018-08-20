@@ -13,8 +13,8 @@ import json
 # Global Variables
 team_name = 'TheShields'                        # The Name of the Team
 team_auth = ''                                  # The Team Authentication Tocken
-server_url = 'http://192.168.59.103:8080/api'   # URL of the SERVER API
-server_ws = 'ws://192.168.59.103:8080/ws'       # URL of the Sensors Websocket
+server_url = 'localhost:8080/api'   # URL of the SERVER API
+server_ws = 'ws://localhost:8080/ws'       # URL of the Sensors Websocket
 
 
 # Server Method Calls ------------------------------------------------
@@ -109,7 +109,7 @@ def team_strategy(parsed_json):
     # Find this team
     for team in teams_list:
         if team['name'] == team_name:
-            if team['shield'] <> True and team['energy'] > 10:
+            if team['shield'] != True and team['energy'] > 10:
                 # Check if Shield is up and shield energy is larger than 10%
                 print("\nGameMove: Team: {0} Action: Shield UP!| Energy: {1}".format(team_name, str(team['energy'])))
                 team_shield_up(team_name, team_auth)
@@ -147,4 +147,4 @@ while True:
 
 ws.close()
 
-print "Good bye!"
+print("Good bye!")
