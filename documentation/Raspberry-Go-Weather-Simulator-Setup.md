@@ -53,8 +53,8 @@ The Sensor service requires the following Go packages:
 
 Install using the following Commands:
 
-    go get https://github.com/gorilla/websocket
-    go get https://github.com/gorilla/mux
+    go get github.com/gorilla/websocket
+    go get github.com/gorilla/mux
 
 
 ### Executing the Sensors' Service
