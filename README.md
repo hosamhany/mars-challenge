@@ -32,7 +32,6 @@ and implement a solution that allows you to survive and outlast other teams.
 **Available hardware and software resources for each team:**
 - 1 x Raspberry Pi **per Team** to act as an atmospheric sensor
 - 1 x VM in a cloud provider **per Team** to act as a container host
-- Raspberry Pi and VM are pre-loaded with Docker
 
 **Challenge Requirements:**
 - Each Participant will need to bring their own Laptop/computer.

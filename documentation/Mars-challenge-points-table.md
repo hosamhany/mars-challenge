@@ -39,8 +39,8 @@ be added at the end of the Challenge. The team that has the most points will win
 
 |####|Name|Tier|Description|Points|
 |----|----|----|-----------|------|
-|T3-1 |Data Hog|Tier 3|Store all Sensor Data from system|5|
-|T3-2 |Data Hog|Tier 3|Store all Logs from system|5|
+|T3-1 |Data Hog 1|Tier 3|Store all Sensor Data from system|5|
+|T3-2 |Data Hog 2|Tier 3|Store all Logs from system|5|
 |T3-3 |The Black Box|Tier 3| Create a separate storage for data backups|5|
 |T3-4 |REX-Ray|Tier 3|Use REX-ray to mount external storage volume for persistence|10|
 
