@@ -50,7 +50,7 @@ just as passionate or more. The goals for the challenge are the following:
 - Deploy a distributed application using containers.
 - Practice container configuration, execution and debugging.
 - Deploy a distributed application using modern deployment technologies like
-  Docker Swarm, Compose, Mesos, or Kubernetes.
+  Docker Swarm, Compose, or Kubernetes.
 - Develop an application on the Internet of Things (IoT) space.
 
 ## Requirements
@@ -60,7 +60,6 @@ This Challenge requires the following or their participants:
 - Each Participant needs to bring their own computer/laptop
 - Have a good attitude and plan to have serious technical fun
 - Be a Team player
-- Adhere to the LinuxCon/ContainerCon/MesosCon Code of Conduct
 
 ## Winning
 
@@ -210,7 +209,7 @@ applications. Some important aspects of managing micro services are:
 - **Service Orchestration:** Implement Service Orchestration for all the
   Tiers/containers.
 - **Automated Service Deployment:** Deployment of the implemented system using
-  Docker Tooling, Kubernetes, Mesos, Puppet/Ansible/Chef/Saltstack or similar.
+  Docker Tooling, Kubernetes, Puppet/Ansible/Chef/Saltstack or similar.
 - **Logging Router:** Deploy, connect and route the logs of the application
   using a logging router.
 
@@ -285,8 +284,8 @@ For our example we will run the code directly from command line/terminal:
 3. Edit the `Team-client.py` file. On lines 16 and 17, change the Values of the
    **IP address and ports** to the ones that you used for the Game Controller.
    These are the variables:
-	- Line 16: `server_url = 'http://192.168.59.103:8080/api'`   # URL of the SERVER API
-	- Line 17: `server_ws = 'ws://192.168.59.103:8080/ws'`       # URL of the Sensors Websocket
+	- Line 16: `server_url = 'localhost:8080/api'`   # URL of the SERVER API
+	- Line 17: `server_ws = 'ws://localhost:8080/ws'`       # URL of the Sensors Websocket
 4. Save the File
 5. Execute the following command:
    `sudo python Team-client.py`. The Program will wait until the game starts to
@@ -401,7 +400,6 @@ implemented using any data repository.
 - Stores the log data from all services.
 
 **Implementation:**
-- Needs to be a clustered service.
 - Needs to be implemented as a service.
 - Service needs to be executed in a container.
 - Service needs to be deployed as part of the application.
