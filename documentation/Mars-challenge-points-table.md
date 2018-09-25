@@ -35,7 +35,7 @@ be added at the end of the Challenge. The team that has the most points will win
 |T2-2|Data smarts| Tier 2| Modify the Aggregator to send all the RAW sensor and AVG data to a storage repository|5|
 |T2-3|My Gateway Container|Tier 2| Build a container for the Aggregator. Use this container for the rest of the challenge|5|
 
-### Tier 3 Data Repository:
+### Tier 3 Data Repository: (Bonus tier)
 
 |####|Name|Tier|Description|Points|
 |----|----|----|-----------|------|
@@ -51,14 +51,14 @@ be added at the end of the Challenge. The team that has the most points will win
 |T4-1|Analytic Brain|Tier 4| Setup a node or a cluster of Hadoop/Spark/F#(or any language/tool of your choice) to analyze data. This tier will help you to better anticipate change.|15|
 |T4-2|My Analytic Container|Tier 4| Build a container with the Data Analysis tier. Use this container for the rest of the challenge|5|
 
-### Tier 5 Team Client and Control Tier
+### Tier 5 Team Client and Control Tier (Bonus tier)
 
 |#####|Name|Tier|Description|Points|
 |----|----|----|-----------|------|
 |T5-1|Command and Control|Tier 5| Implement a service that can retrieve data from the Gateway/Game Controller, join the game, and use the sensor data to take actions to protect the base|5|
 |T5-2|My C&C Container|Tier 5| Build a container with the C&C tier. Use this container for the rest of the challenge|5|
 
-### Tier 6 Data Backup
+### Tier 6 Data Backup (Bonus tier)
 
 |#####|Name|Tier|Description|Points|
 |----|----|----|-----------|------|
