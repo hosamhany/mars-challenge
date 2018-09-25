@@ -24,7 +24,7 @@ be added at the end of the Challenge. The team that has the most points will win
 |####|Name|Tier|Description|Points|
 |----|----|----|-----------|------|
 |T1-1 |Sensor Software Running in Raspberry|Tier 1|Get the SensorSuite program running in the Raspberry Pi|5|
-|T1-2 |My Sensor Containers|Tier 1| Build a container for each sensor in the SensorSuite and Deploy it on DockerHub.com. Use these containers for the rest of the challenge|10|
+|T1-2 |My Sensor Containers|Tier 1| Build a container for each sensor in the SensorSuite. Use these containers for the rest of the challenge|10|
 |T1-3 |Bridge The Gap|Tier 1|Run your *Flare* container in your cloud VM, and configure your other sensors to reach it|5|
 
 ### Tier 2 The Aggregator:
