@@ -50,7 +50,7 @@ just as passionate or more. The goals for the challenge are the following:
 - Deploy a distributed application using containers.
 - Practice container configuration, execution and debugging.
 - Deploy a distributed application using modern deployment technologies like
-  Docker Swarm, Compose, Mesos, or Kubernetes.
+  Docker Swarm, Compose, or Kubernetes.
 - Develop an application on the Internet of Things (IoT) space.
 
 ## Requirements
@@ -60,17 +60,16 @@ This Challenge requires the following or their participants:
 - Each Participant needs to bring their own computer/laptop
 - Have a good attitude and plan to have serious technical fun
 - Be a Team player
-- Adhere to the LinuxCon/ContainerCon/MesosCon Code of Conduct
 
 ## Winning
 
 The Challenge is designed to be completed in the time allotted. Each team will
-have to choose which features [(tasks)](https://github.com/codedellemc/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md)
+have to choose which features [(tasks)](https://github.com/fidelsam1992/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md)
 to implement and deploy as part of their solution. **The only condition** is to
-have a working solution that satisfies task **[CC-1](https://github.com/codedellemc/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md)** (demonstrate participation in an official Game).
+have a working solution that satisfies task **[CC-1](https://github.com/fidelsam1992/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md)** (demonstrate participation in an official Game).
 Refer to the [Testing the Command and Control Center](#testing-the-command-and-control-center) section to get this part running.
 
-**[Each task your team accomplishes has a point value](https://github.com/codedellemc/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "Mars Challenge Points Table")**
+**[Each task your team accomplishes has a point value](https://github.com/fidelsam1992/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "Mars Challenge Points Table")**
 
 For each task, functionality needs to be successfully demoed to a Judge, then
 points will be assigned. Point count for each team will be visible for the
@@ -82,7 +81,7 @@ entire length of the contest.
 
 At the conclusion of the Challenge, a best of 3 shootout is held between all
 teams to see which algorithm lasts the longest on Mars. This is task
-**[CC-2](https://github.com/codedellemc/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md)**
+**[CC-2](https://github.com/fidelsam1992/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md)**
 The winner of the shootout may not be the over all Challenge winner!
 
 
@@ -99,14 +98,14 @@ services:
 
 |Service Name|Folder Location|
 |----|----|
-|SensorSuite Service| [https://github.com/codedellemc/mars-challenge/tree/master/sensorsuite](https://github.com/codedellemc/mars-challenge/tree/master/sensorsuite)|
-|Aggregator Service| [https://github.com/codedellemc/mars-challenge/tree/master/aggregator](https://github.com/codedellemc/mars-challenge/tree/master/aggregator)|
+|SensorSuite Service| [https://github.com/fidelsam1992/mars-challenge/tree/master/sensorsuite](https://github.com/fidelsam1992/mars-challenge/tree/master/sensorsuite)|
+|Aggregator Service| [https://github.com/fidelsam1992/mars-challenge/tree/master/aggregator](https://github.com/fidelsam1992/mars-challenge/tree/master/aggregator)|
 |Data Repository| Refer to the [System Tiers](#system-tiers) section for more information . |
 |Data Analysis | Refer to the [System Tiers](#system-tiers) for more information.|
-|Team Command & Control| [https://github.com/codedellemc/mars-challenge/tree/master/clients/python](https://github.com/codedellemc/mars-challenge/tree/master/clients/python)|
-|Game Controller| [https://github.com/codedellemc/mars-challenge/tree/master/game-controller](https://github.com/codedellemc/mars-challenge/tree/master/game-controller)|
-|Game Controller Dashboard| [https://github.com/codedellemc/mars-challenge/tree/master/dashboard](https://github.com/codedellemc/mars-challenge/tree/master/dashboard)|
-|RaspBerry Pi Sensor Setup| [https://github.com/codedellemc/mars-challenge/blob/master/documentation/Raspberry-Go-Weather-Simulator-Setup.md](https://github.com/codedellemc/mars-challenge/blob/master/documentation/Raspberry-Go-Weather-Simulator-Setup.md)|
+|Team Command & Control| [https://github.com/fidelsam1992/mars-challenge/tree/master/clients/python](https://github.com/fidelsam1992/mars-challenge/tree/master/clients/python)|
+|Game Controller| [https://github.com/fidelsam1992/mars-challenge/tree/master/game-controller](https://github.com/fidelsam1992/mars-challenge/tree/master/game-controller)|
+|Game Controller Dashboard| [https://github.com/fidelsam1992/mars-challenge/tree/master/dashboard](https://github.com/fidelsam1992/mars-challenge/tree/master/dashboard)|
+|RaspBerry Pi Sensor Setup| [https://github.com/fidelsam1992/mars-challenge/blob/master/documentation/Raspberry-Go-Weather-Simulator-Setup.md](https://github.com/fidelsam1992/mars-challenge/blob/master/documentation/Raspberry-Go-Weather-Simulator-Setup.md)|
 
 ### Containers
 
@@ -134,19 +133,19 @@ This section focuses on getting the sensor data from the SensorSuite to the
 Aggregator Service, which then sends an aggregated stream to the Game
 Controller.
 
- ![Mars Challenge Participants Stage 1](https://github.com/codedellemc/mars-challenge/blob/master/documentation/images/marshackathon-Participant-stage1.png).
+ ![Mars Challenge Participants Stage 1](https://github.com/fidelsam1992/mars-challenge/blob/master/documentation/images/marshackathon-Participant-stage1.png).
 
 In order to implement section 1 you will need the following components:
 
 |Service Name|Container Location|
 |----|----|
-|SensorSuite Service (Tier 1)| [https://github.com/codedellemc/mars-challenge/tree/master/sensorsuite](https://github.com/codedellemc/mars-challenge/tree/master/sensorsuite)|
+|SensorSuite Service (Tier 1)| [https://github.com/fidelsam1992/mars-challenge/tree/master/sensorsuite](https://github.com/fidelsam1992/mars-challenge/tree/master/sensorsuite)|
 |Aggregator Service (Tier 2)| [https://hub.docker.com/r/emccode/mars-challenge-aggregator/](https://hub.docker.com/r/emccode/mars-challenge-aggregator/ "Aggregator Service")|
 |Game Challenge Controller| [https://hub.docker.com/r/emccode/mars-challenge-controller/](https://hub.docker.com/r/emccode/mars-challenge-controller/ "Game Challenge Controller")|
 |Controller Dashboard| [https://hub.docker.com/r/emccode/mars-challenge-dashboard/](https://hub.docker.com/r/emccode/mars-challenge-dashboard/ "Controller Dashboard")|
 
 A Demo implementations of a Command and Control (Tier 5) Service, implemented in
-Python, is located in the following folder: [https://github.com/codedellemc/mars-challenge/tree/master/clients/python](https://github.com/codedellemc/mars-challenge/tree/master/clients/python "Command and Control Demo")
+Python, is located in the following folder: [https://github.com/fidelsam1992/mars-challenge/tree/master/clients/python](https://github.com/fidelsam1992/mars-challenge/tree/master/clients/python "Command and Control Demo")
 
 Once you have the components in place, you and your team will have to create a
 deployment and orchestrate how services are deployed in a specific order:
@@ -164,7 +163,7 @@ To test and iterate, you will deploy all components yourself, outlined above.
 At the end of the game, the judges will have deployed a central solar flare
 component, an Aggregator, the Game Controller and Dashboard.
 
-You will get [points](https://github.com/codedellemc/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "Mars Challenge Points Table")
+You will get [points](https://github.com/fidelsam1992/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "Mars Challenge Points Table")
 for automating the deployment and orchestration of this section.
 
 ### Section 2: Perform Analytic and Data Saving Operations
@@ -172,7 +171,7 @@ for automating the deployment and orchestration of this section.
 **Section 2:** This section focuses on getting the rest of services that work
 with the Team Command and Control center:
 
-![Mars Challenge Participants Stage 2](https://github.com/codedellemc/mars-challenge/blob/master/documentation/images/marshackathon-Participant-stage2.png)
+![Mars Challenge Participants Stage 2](https://github.com/fidelsam1992/mars-challenge/blob/master/documentation/images/marshackathon-Participant-stage2.png)
 
 The first step is to make sure you have a Command and Control service
 working. This is algorithm you create for deciding when to raise your shields
@@ -190,7 +189,7 @@ you can implement:
 - Backup Service
 
 Please Refer to the **[System Tiers](#system-tiers)** section for more details
-on these. Remember, each one of these tier will get you more [points](https://github.com/codedellemc/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "Mars Challenge Points Table")
+on these. Remember, each one of these tier will get you more [points](https://github.com/fidelsam1992/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "Mars Challenge Points Table")
 and at the same time it will increase the complexity of the deployments.
 
 
@@ -210,7 +209,7 @@ applications. Some important aspects of managing micro services are:
 - **Service Orchestration:** Implement Service Orchestration for all the
   Tiers/containers.
 - **Automated Service Deployment:** Deployment of the implemented system using
-  Docker Tooling, Kubernetes, Mesos, Puppet/Ansible/Chef/Saltstack or similar.
+  Docker Tooling, Kubernetes, Puppet/Ansible/Chef/Saltstack or similar.
 - **Logging Router:** Deploy, connect and route the logs of the application
   using a logging router.
 
@@ -224,7 +223,7 @@ Controller in testing mode. This disables the Sensor API and causes the Game
 Controller to locally generate sensor readings instead. You will need to run the
 Game Controller and Game Controller's Dashboard.
 
-![Testing the Command and Control Center](https://github.com/codedellemc/mars-challenge/blob/master/documentation/images/Mars-challenge-testing-control-center.png)
+![Testing the Command and Control Center](https://github.com/fidelsam1992/mars-challenge/blob/master/documentation/images/Mars-challenge-testing-control-center.png)
 
 The Game containers are located here:
 
@@ -270,7 +269,7 @@ The last step is to execute the Command and Control Center code. You can run the
 code directly or run it as a container.
 
 A Demo of a Command and Control (Tier 5) Center, implemented in Python, is
-provided and is located in the following folder: [https://github.com/codedellemc/mars-challenge/tree/master/clients/python](https://github.com/codedellemc/mars-challenge/tree/master/clients/python "Command and Control Demo")
+provided and is located in the following folder: [https://github.com/fidelsam1992/mars-challenge/tree/master/clients/python](https://github.com/fidelsam1992/mars-challenge/tree/master/clients/python "Command and Control Demo")
 
 The Demo implements all the interfaces provided by the Game Controller and
 implements shield operations based on sensor data.
@@ -278,15 +277,15 @@ implements shield operations based on sensor data.
 For our example we will run the code directly from command line/terminal:
 
 1. Get the code from the code repository:
-   `https://github.com/codedellemc/mars-challenge/`.
+   `https://github.com/fidelsam1992/mars-challenge/`.
     You can perform a git clone:
-    `git clone https://github.com/codedellemc/mars-challenge.git`
+    `git clone https://github.com/fidelsam1992/mars-challenge.git`
 2. Navigate to the `/clients/python` folder
 3. Edit the `Team-client.py` file. On lines 16 and 17, change the Values of the
    **IP address and ports** to the ones that you used for the Game Controller.
    These are the variables:
-	- Line 16: `server_url = 'http://192.168.59.103:8080/api'`   # URL of the SERVER API
-	- Line 17: `server_ws = 'ws://192.168.59.103:8080/ws'`       # URL of the Sensors Websocket
+	- Line 16: `server_url = 'localhost:8080/api'`   # URL of the SERVER API
+	- Line 17: `server_ws = 'ws://localhost:8080/ws'`       # URL of the Sensors Websocket
 4. Save the File
 5. Execute the following command:
    `sudo python Team-client.py`. The Program will wait until the game starts to
@@ -340,7 +339,7 @@ For our example we will run the code directly from command line/terminal:
 	    Cannot reset game while it is running
 
 
-**Note:** Refer to the [Game controller Information page](https://github.com/codedellemc/mars-challenge/tree/master/game-controller "Game Controller information page") for more details on the Game Controller API and configuration.
+**Note:** Refer to the [Game controller Information page](https://github.com/fidelsam1992/mars-challenge/tree/master/game-controller "Game Controller information page") for more details on the Game Controller API and configuration.
 
 ## System Tiers
 
@@ -386,7 +385,7 @@ to the Game Controller.
 - Receive and average data from all Sensor Arrays
 - Relay the Data to the Game Controller.
 
-Implementation of the Aggregator tier is located in this folder: [https://github.com/codedellemc/mars-challenge/tree/master/aggregator](https://github.com/codedellemc/mars-challenge/tree/master/aggregator)
+Implementation of the Aggregator tier is located in this folder: [https://github.com/fidelsam1992/mars-challenge/tree/master/aggregator](https://github.com/fidelsam1992/mars-challenge/tree/master/aggregator)
 
 A container with a working aggregator can be found here: [https://hub.docker.com/r/emccode/mars-challenge-aggregator/](https://hub.docker.com/r/emccode/mars-challenge-aggregator/ "Aggregator Service")
 
@@ -401,7 +400,6 @@ implemented using any data repository.
 - Stores the log data from all services.
 
 **Implementation:**
-- Needs to be a clustered service.
 - Needs to be implemented as a service.
 - Service needs to be executed in a container.
 - Service needs to be deployed as part of the application.
@@ -464,4 +462,4 @@ team completes. Points are distributed per:
 - Completing the challenge
 - Bonus Points
 
-**Detailed Points Table is located [here](https://github.com/codedellemc/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "Mars Challenge Points Table")**
+**Detailed Points Table is located [here](https://github.com/fidelsam1992/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "Mars Challenge Points Table")**
