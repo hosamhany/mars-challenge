@@ -14,8 +14,8 @@ import pickle
 # Global Variables
 team_name = 'TheShields'  # The Name of the Team
 team_auth = ''  # The Team Authentication Token
-server_url = 'http://10.207.81.113:8080/api'  # URL of the SERVER API
-server_ws = 'ws://10.207.81.113:8080/ws'  # URL of the Sensors Websocket
+server_url = 'http://10.207.80.16:8080/api'  # URL of the SERVER API
+server_ws = 'ws://10.207.80.16:8080/ws'  # URL of the Sensors Websocket
 
 team_list = 10
 max_radiation = 0
@@ -144,7 +144,7 @@ def team_strategy(parsed_json):
                 radiation_ratio = (radiation - min_radiation) / (max_radiation - min_radiation)
                 temperature_ratio = (temperature - min_temperature) / (max_temperature - min_temperature)
                 decision_tree = pickle.load(pkl_input)
-                prediction = decision_tree.predict([radiation_ratio, temperature_ratio])[0]
+                prediction = decision_tree.predict([[radiation_ratio, temperature_ratio]])[0]
                 if prediction == 1:
                     team_shield_up(team_name, team_auth)
                 elif prediction == 0:
@@ -159,7 +159,7 @@ def team_strategy(parsed_json):
                 radiation_ratio = (radiation - min_radiation) / (max_radiation - min_radiation)
                 temperature_ratio = (temperature - min_temperature) / (max_temperature - min_temperature)
                 k_means_model = pickle.load(pkl_input)
-                prediction = k_means_model.predict([radiation_ratio, temperature_ratio])[0]
+                prediction = k_means_model.predict([[radiation_ratio, temperature_ratio]])[0]
                 if prediction == 1:
                     team_shield_up(team_name, team_auth)
                 elif prediction == 0:
