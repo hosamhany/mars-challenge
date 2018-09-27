@@ -8,6 +8,10 @@
 import requests
 import websocket
 import json
+import pickle
+import csv
+from sklearn.cluster import KMeans
+from sklearn import tree
 
 
 # Global Variables
@@ -19,6 +23,13 @@ server_ws = 'ws://localhost:8080/ws'       # URL of the Sensors Websocket
 
 # Server Method Calls ------------------------------------------------
 
+team_list = 10
+max_radiation = 0
+min_radiation = 1000
+min_temperature = -142
+max_temperature = 35
+with open('train_data.csv', 'w') as csvFile:
+    pass
 def register_team(team_name):
     """
     Registers the Team in the Server
@@ -105,16 +116,13 @@ def team_strategy(parsed_json):
 
     # Get the Team List
     teams_list = parsed_json['teams']
-
-    # Find this team
-    for team in teams_list:
-        if team['name'] == team_name:
-            if team['shield'] != True and team['energy'] > 10:
-                # Check if Shield is up and shield energy is larger than 10%
-                print("\nGameMove: Team: {0} Action: Shield UP!| Energy: {1}".format(team_name, str(team['energy'])))
-                team_shield_up(team_name, team_auth)
-            else:
-               print("\nTeam: {0} Action: None| Energy: {1}".format(team_name, str(team['energy'])))
+    readings = parsed_json['readings']
+    solar_flare = readings['solarFlare']
+    temperature = readings['temperature']
+    radiation = readings['radiation']
+    with open('train_data.csv', 'a') as csvFile:
+        writer = csv.writer(csvFile)
+        writer.writerow([solar_flare, temperature, radiation])
 
 
 # Register the Team
@@ -148,3 +156,34 @@ while True:
 ws.close()
 
 print("Good bye!")
+
+
+    # # Find this tea,./;m
+    # for team in teams_list:
+    #     if team['name'] == team_name:
+    #         with open("tree.pkl", 'rb') as pkl_input:
+    #             radiation_ratio = (radiation - min_radiation) / (max_radiation - min_radiation)
+    #             temperature_ratio = (temperature - min_temperature) / (max_temperature - min_temperature)
+    #             decision_tree = pickle.load(pkl_input)
+    #             prediction = decision_tree.predict([radiation_ratio, temperature_ratio])[0]
+    #             if prediction == 1:
+    #                 team_sheid_up(team_name,team_auth)
+    #             elif prediction == 0:
+    #                 pass
+    #             else:
+    #                 raise ValueError("Prediction Value is not known")
+    #     else:
+    #         with open("k_means_model.pkl", 'rb') as pkl_input:
+    #             readings = parsed_json['readings']
+    #             temperature = readings['temperature']
+    #             radiation = readings['radiation']
+    #             radiation_ratio = (radiation - min_radiation) / (max_radiation - min_radiation)
+    #             temperature_ratio = (temperature - min_temperature) / (max_temperature - min_temperature)
+    #             k_means_model = pickle.load(pkl_input)
+    #             prediction = k_means_model.predict([radiation_ratio, temperature_ratio])[0]
+    #             if prediction == 1:
+    #                 team_sheid_up(team_name,team_auth)
+    #             elif prediction == 0:
+    #                 pass
+    #             else:
+    #                 raise ValueError("Prediction value")
