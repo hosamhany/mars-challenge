@@ -1,4 +1,4 @@
-#!/bin/python
+# !/bin/python
 # Mars Team Client Example written in Python
 # Requires the following library to install: sudo pip install websocket-client
 # if you encounter errors with a Six import:
@@ -8,14 +8,22 @@
 import requests
 import websocket
 import json
-
+import csv
 
 # Global Variables
-team_name = 'TheShields'                        # The Name of the Team
-team_auth = ''                                  # The Team Authentication Tocken
-server_url = 'http://192.168.59.103:8080/api'   # URL of the SERVER API
-server_ws = 'ws://192.168.59.103:8080/ws'       # URL of the Sensors Websocket
+team_name = 'TheShields'  # The Name of the Team
+team_auth = ''  # The Team Authentication Token
+server_url = '10.207.81.113:8080/api'  # URL of the SERVER API
+server_ws = 'ws://10.207.81.113:8080/ws'  # URL of the Sensors Websocket
 
+team_list = 10
+max_radiation = 0
+min_radiation = 1000
+min_temperature = -142
+max_temperature = 35
+
+with open('train_data.csv', 'w') as csvFile:
+    pass  # create the file
 
 # Server Method Calls ------------------------------------------------
 
@@ -37,11 +45,11 @@ def register_team(team_name):
     # print ('Team Authentication Code:' + team_auth )
 
     if response.status_code == 200:
-        print ('Team \'' + team_name + '\' joined the game!')
-        print (team_name + ' authentication Code: ' + team_auth)
+        print('Team \'' + team_name + '\' joined the game!')
+        print(team_name + ' authentication Code: ' + team_auth)
     else:
-        print ('Team \'' + team_name + '\' joining game Failed!')
-        print ("HTTP Code: " + str(response.status_code) + " | Response: " + response.text)
+        print('Team \'' + team_name + '\' joining game Failed!')
+        print("HTTP Code: " + str(response.status_code) + " | Response: " + response.text)
 
     return team_auth
 
@@ -59,10 +67,10 @@ def team_shield_up(team_name, team_auth):
     auth_header = {'X-Auth-Token': team_auth}
     shield_up = requests.post(url, headers=auth_header)
     if shield_up.status_code == 200:
-        print ('Server: Team: ' + team_name + ' Shield is UP!')
+        print('Server: Team: ' + team_name + ' Shield is UP!')
     else:
-        print ('Server: Team: ' + team_name + ' Shield UP! request Failed!')
-        print ("HTTP Code: " + str(shield_up.status_code) + " | Response: " + shield_up.text)
+        print('Server: Team: ' + team_name + ' Shield UP! request Failed!')
+        print("HTTP Code: " + str(shield_up.status_code) + " | Response: " + shield_up.text)
 
 
 def team_shield_down(team_name, team_auth):
@@ -77,10 +85,10 @@ def team_shield_down(team_name, team_auth):
     auth_header = {'X-Auth-Token': team_auth}
     shield_down = requests.post(url, headers=auth_header)
     if shield_down.status_code == 200:
-        print ('Server: Team: ' + team_name + ' Shield is DOWN!')
+        print('Server: Team: ' + team_name + ' Shield is DOWN!')
     else:
-        print ('Server: Team: ' + team_name + ' Shield DOWN! request Failed!')
-        print ("HTTP Code: " + str(shield_down.status_code) + " | Response: " + shield_down.text)
+        print('Server: Team: ' + team_name + ' Shield DOWN! request Failed!')
+        print("HTTP Code: " + str(shield_down.status_code) + " | Response: " + shield_down.text)
 
 
 # Client Logic ------------------------------------------------
@@ -105,22 +113,28 @@ def team_strategy(parsed_json):
 
     # Get the Team List
     teams_list = parsed_json['teams']
+    readings = parsed_json['readings']
+    solar_flare = readings['solarFlare']
+    temperature = readings['temperature']
+    radiation = readings['radiation']
+    with open('train_data.csv', 'a') as csvFile:
+        writer = csv.writer(csvFile)
+        writer.writerow([solar_flare, temperature, radiation])
 
-    # Find this team
-    for team in teams_list:
-        if team['name'] == team_name:
-            if team['shield'] <> True and team['energy'] > 10:
-                # Check if Shield is up and shield energy is larger than 10%
-                print("\nGameMove: Team: {0} Action: Shield UP!| Energy: {1}".format(team_name, str(team['energy'])))
-                team_shield_up(team_name, team_auth)
-            else:
-               print("\nTeam: {0} Action: None| Energy: {1}".format(team_name, str(team['energy'])))
+    # # Find this team
+    # for team in teams_list:
+    #     if team['name'] == team_name:
+    #         if team['shield'] != True and team['energy'] > 10:
+    #             # Check if Shield is up and shield energy is larger than 10%
+    #             print("\nGameMove: Team: {0} Action: Shield UP!| Energy: {1}".format(team_name, str(team['energy'])))
+    #             team_shield_up(team_name, team_auth)
+    #         else:
+    #             print("\nTeam: {0} Action: None| Energy: {1}".format(team_name, str(team['energy'])))
 
 
 # Register the Team
 
 team_auth = register_team(team_name)
-
 
 # Create the WebSocket for Listening
 ws = websocket.create_connection(server_ws)
@@ -147,4 +161,4 @@ while True:
 
 ws.close()
 
-print "Good bye!"
+print("Good bye!")
