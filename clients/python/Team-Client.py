@@ -134,38 +134,38 @@ def team_strategy(parsed_json):
     #     writer = csv.writer(csvFile)
     #     writer.writerow([solar_flare, temperature, radiation])
     for team in teams_list:
-        if team['energy'] <= 10:
-            team_shield_down(team_name, team_auth)
-        elif team['life'] <= 10:
-            team_shield_up(team_name, team_auth)
+        # if team['energy'] <= 20:
+        #     team_shield_down(team_name, team_auth)
+        # elif team['life'] <= 20:
+        #     team_shield_up(team_name, team_auth)
+        # else:
+        if team['name'] == 'TheShields':
+            with open("tree.pkl", 'rb') as pkl_input:
+                radiation_ratio = (radiation - min_radiation) / (max_radiation - min_radiation)
+                temperature_ratio = (temperature - min_temperature) / (max_temperature - min_temperature)
+                decision_tree = pickle.load(pkl_input)
+                prediction = decision_tree.predict([radiation_ratio, temperature_ratio])[0]
+                if prediction == 1:
+                    team_shield_up(team_name, team_auth)
+                elif prediction == 0:
+                    team_shield_down(team_name, team_auth)
+                else:
+                    raise ValueError("Prediction Value is not known")
         else:
-            if team['name'] == team_name:
-                with open("tree.pkl", 'rb') as pkl_input:
-                    radiation_ratio = (radiation - min_radiation) / (max_radiation - min_radiation)
-                    temperature_ratio = (temperature - min_temperature) / (max_temperature - min_temperature)
-                    decision_tree = pickle.load(pkl_input)
-                    prediction = decision_tree.predict([radiation_ratio, temperature_ratio])[0]
-                    if prediction == 1:
-                        team_shield_up(team_name, team_auth)
-                    elif prediction == 0:
-                        team_shield_down(team_name, team_auth)
-                    else:
-                        raise ValueError("Prediction Value is not known")
-            else:
-                with open("k_means_model.pkl", 'rb') as pkl_input:
-                    readings = parsed_json['readings']
-                    temperature = readings['temperature']
-                    radiation = readings['radiation']
-                    radiation_ratio = (radiation - min_radiation) / (max_radiation - min_radiation)
-                    temperature_ratio = (temperature - min_temperature) / (max_temperature - min_temperature)
-                    k_means_model = pickle.load(pkl_input)
-                    prediction = k_means_model.predict([radiation_ratio, temperature_ratio])[0]
-                    if prediction == 1:
-                        team_shield_up(team_name, team_auth)
-                    elif prediction == 0:
-                        team_shield_down(team_name, team_auth)
-                    else:
-                        raise ValueError("Prediction value is not known")
+            with open("k_means_model.pkl", 'rb') as pkl_input:
+                readings = parsed_json['readings']
+                temperature = readings['temperature']
+                radiation = readings['radiation']
+                radiation_ratio = (radiation - min_radiation) / (max_radiation - min_radiation)
+                temperature_ratio = (temperature - min_temperature) / (max_temperature - min_temperature)
+                k_means_model = pickle.load(pkl_input)
+                prediction = k_means_model.predict([radiation_ratio, temperature_ratio])[0]
+                if prediction == 1:
+                    team_shield_up(team_name, team_auth)
+                elif prediction == 0:
+                    team_shield_down(team_name, team_auth)
+                else:
+                    raise ValueError("Prediction value is not known")
 
 # Register the Team
 
