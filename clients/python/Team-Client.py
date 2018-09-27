@@ -13,7 +13,7 @@ import csv
 # Global Variables
 team_name = 'TheShields'  # The Name of the Team
 team_auth = ''  # The Team Authentication Token
-server_url = '10.207.81.113:8080/api'  # URL of the SERVER API
+server_url = 'http://10.207.81.113:8080/api'  # URL of the SERVER API
 server_ws = 'ws://10.207.81.113:8080/ws'  # URL of the Sensors Websocket
 
 team_list = 10
@@ -21,12 +21,6 @@ max_radiation = 0
 min_radiation = 1000
 min_temperature = -142
 max_temperature = 35
-
-# Global Variables
-team_name = 'TheShields'                        # The Name of the Team
-team_auth = ''                                  # The Team Authentication Tocken
-server_url = 'localhost:8080/api'   # URL of the SERVER API
-server_ws = 'ws://localhost:8080/ws'       # URL of the Sensors Websocket
 
 with open('train_data.csv', 'w') as csvFile:
     pass  # create the file
@@ -38,8 +32,6 @@ max_radiation = 0
 min_radiation = 1000
 min_temperature = -142
 max_temperature = 35
-with open('train_data.csv', 'w') as csvFile:
-    pass
 def register_team(team_name):
     """
     Registers the Team in the Server
@@ -112,6 +104,13 @@ def data_recording(parsed_json):
     :param parsed_json:Readings from Mars Sensors
     :return:Nothing
     """
+    readings = parsed_json['readings']
+    solar_flare = readings['solarFlare']
+    temperature = readings['temperature']
+    radiation = readings['radiation']
+    with open('train_data.csv', 'a') as csvFile:
+        writer = csv.writer(csvFile)
+        writer.writerow([solar_flare, temperature, radiation])
     print("\nData Recording: Saving Data row for persistence. Time: " + str(parsed_json['startedAt']))
 
 
@@ -130,9 +129,9 @@ def team_strategy(parsed_json):
     solar_flare = readings['solarFlare']
     temperature = readings['temperature']
     radiation = readings['radiation']
-    with open('train_data.csv', 'a') as csvFile:
-        writer = csv.writer(csvFile)
-        writer.writerow([solar_flare, temperature, radiation])
+    # with open('train_data.csv', 'a') as csvFile:
+    #     writer = csv.writer(csvFile)
+    #     writer.writerow([solar_flare, temperature, radiation])
 
     # # Find this team
     # for team in teams_list:
