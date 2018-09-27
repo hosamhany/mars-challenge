@@ -124,48 +124,32 @@ def team_strategy(parsed_json):
     # The Strategy for this client is to have the shield up constantly until it is depleted.
     # Then wait until is charged again to a 10% and enable it again
 
-    # Get the Team List
     teams_list = parsed_json['teams']
     readings = parsed_json['readings']
-    solar_flare = readings['solarFlare']
-    temperature = readings['temperature']
-    radiation = readings['radiation']
-    # with open('train_data.csv', 'a') as csvFile:
-    #     writer = csv.writer(csvFile)
-    #     writer.writerow([solar_flare, temperature, radiation])
+    # Find this team
     for team in teams_list:
-        # if team['energy'] <= 20:
-        #     team_shield_down(team_name, team_auth)
-        # elif team['life'] <= 20:
-        #     team_shield_up(team_name, team_auth)
-        # else:
-        if team['name'] == 'TheShields':
-            with open("tree.pkl", 'rb') as pkl_input:
-                radiation_ratio = (radiation - min_radiation) / (max_radiation - min_radiation)
-                temperature_ratio = (temperature - min_temperature) / (max_temperature - min_temperature)
-                decision_tree = pickle.load(pkl_input)
-                prediction = decision_tree.predict([[radiation_ratio, temperature_ratio]])[0]
-                if prediction == 1:
-                    team_shield_up(team_name, team_auth)
-                elif prediction == 0:
+        if team['name'] == team_name:
+            print("\n current temperature: " + str(readings['temperature']) + " current radiation: " + str(
+                readings['radiation']))
+            print("\n team shield is: " + str(team['shield']))
+            if readings['radiation'] >= 700 and team['shield'] != True:
+                print("shield up, radiation is too high")
+                team_shield_up(team_name, team_auth)
+            else:
+                if readings['radiation'] < 300 and team['life'] > 50:
+                    print("shield down, radiation is low")
                     team_shield_down(team_name, team_auth)
                 else:
-                    raise ValueError("Prediction Value is not known")
-        else:
-            with open("k_means_model.pkl", 'rb') as pkl_input:
-                readings = parsed_json['readings']
-                temperature = readings['temperature']
-                radiation = readings['radiation']
-                radiation_ratio = (radiation - min_radiation) / (max_radiation - min_radiation)
-                temperature_ratio = (temperature - min_temperature) / (max_temperature - min_temperature)
-                k_means_model = pickle.load(pkl_input)
-                prediction = k_means_model.predict([[radiation_ratio, temperature_ratio]])[0]
-                if prediction == 1:
-                    team_shield_up(team_name, team_auth)
-                elif prediction == 0:
-                    team_shield_down(team_name, team_auth)
-                else:
-                    raise ValueError("Prediction value is not known")
+                    if team['energy'] > 50:
+                        print("shield up energy level high")
+                        team_shield_up(team_name, team_auth)
+                    else:
+                        if team['energy'] <= 10:
+                            print("shield down energy level is too low")
+                            team_shield_down(team_name, team_auth)
+                print("\n default case: temperature is: " + str(readings['temperature']) + " radiation is: " + str(
+                    readings['radiation']))
+
 
 # Register the Team
 
