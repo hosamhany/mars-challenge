@@ -9,6 +9,7 @@ import requests
 import websocket
 import json
 import csv
+import random
 import pickle
 
 # Global Variables
@@ -123,32 +124,51 @@ def team_strategy(parsed_json):
   """
     # The Strategy for this client is to have the shield up constantly until it is depleted.
     # Then wait until is charged again to a 10% and enable it again
-
     teams_list = parsed_json['teams']
     readings = parsed_json['readings']
-    # Find this team
     for team in teams_list:
-        if team['name'] == team_name:
-            print("\n current temperature: " + str(readings['temperature']) + " current radiation: " + str(
-                readings['radiation']))
-            print("\n team shield is: " + str(team['shield']))
-            if readings['radiation'] >= 700 and team['shield'] != True:
-                print("shield up, radiation is too high")
+        # Register the Team
+        if team['energy'] <= 10 and team['life'] >= 50:
+            team_shield_down(team_name, team_auth)
+        elif team['energy'] <= 10 and team['life'] <= 10:
+            x = random.uniform(0, 1)
+            if x == 0:
                 team_shield_up(team_name, team_auth)
             else:
-                if readings['radiation'] < 300 and team['life'] > 50:
-                    print("shield down, radiation is low")
-                    team_shield_down(team_name, team_auth)
-                else:
-                    if team['energy'] > 50:
-                        print("shield up energy level high")
-                        team_shield_up(team_name, team_auth)
-                    else:
-                        if team['energy'] <= 10:
-                            print("shield down energy level is too low")
-                            team_shield_down(team_name, team_auth)
-                print("\n default case: temperature is: " + str(readings['temperature']) + " radiation is: " + str(
-                    readings['radiation']))
+                team_shield_down(team_name, team_auth)
+        elif team['energy'] >= 50 and team['life'] <= 10:
+            team_shield_up(team_name, team_auth)
+        else:
+            if readings['temperature'] > 0 or readings['radiations'] > 700:
+                team_shield_up(team_name, team_auth)
+            else:
+                team_shield_down(team_name, team_auth)
+
+    # teams_list = parsed_json['teams']
+    # readings = parsed_json['readings']
+    # # Find this team
+    # for team in teams_list:
+    #     if team['name'] == team_name:
+    #         print("\n current temperature: " + str(readings['temperature']) + " current radiation: " + str(
+    #             readings['radiation']))
+    #         print("\n team shield is: " + str(team['shield']))
+    #         if readings['radiation'] >= 700 and team['shield'] != True:
+    #             print("shield up, radiation is too high")
+    #             team_shield_up(team_name, team_auth)
+    #         else:
+    #             if readings['radiation'] < 300 and team['life'] > 50:
+    #                 print("shield down, radiation is low")
+    #                 team_shield_down(team_name, team_auth)
+    #             else:
+    #                 if team['energy'] > 50:
+    #                     print("shield up energy level high")
+    #                     team_shield_up(team_name, team_auth)
+    #                 else:
+    #                     if team['energy'] <= 10:
+    #                         print("shield down energy level is too low")
+    #                         team_shield_down(team_name, team_auth)
+    #             print("\n default case: temperature is: " + str(readings['temperature']) + " radiation is: " + str(
+    #                 readings['radiation']))
 
 
 # Register the Team
