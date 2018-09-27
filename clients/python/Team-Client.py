@@ -139,7 +139,7 @@ def team_strategy(parsed_json):
         elif team['energy'] >= 50 and team['life'] <= 10:
             team_shield_up(team_name, team_auth)
         else:
-            if readings['temperature'] > 0 or readings['radiations'] > 700:
+            if readings['temperature'] > 0 or readings['radiation'] > 700:
                 team_shield_up(team_name, team_auth)
             else:
                 team_shield_down(team_name, team_auth)
